@@ -636,6 +636,7 @@ profile_list_delete_button_clicked_cb (GtkWidget *button,
                                    _("Delete profile “%s”?"),
                                    terminal_profile_get_property_string (selected_profile, TERMINAL_PROFILE_VISIBLE_NAME));
 
+  gtk_window_set_transient_for(GTK_WINDOW (dialog), GTK_WINDOW(transient_parent));
   gtk_dialog_add_buttons (GTK_DIALOG (dialog),
                           GTK_STOCK_CANCEL,
                           GTK_RESPONSE_REJECT,
@@ -974,7 +975,7 @@ terminal_app_system_font_notify_cb (GSettings   *settings,
   const char *font = NULL;
   PangoFontDescription *font_desc;
 
-  g_settings_get (settings, MONOSPACE_FONT_KEY_NAME, "&s", &font);
+  g_settings_get (settings, MONOSPACE_FONT_KEY_NAME, "s", &font);
 
   font_desc = pango_font_description_from_string (font);
   if (app->system_font_desc &&
@@ -1208,8 +1209,7 @@ terminal_app_new_profile (TerminalApp     *app,
       gtk_dialog_set_response_sensitive (GTK_DIALOG (app->new_profile_dialog), GTK_RESPONSE_ACCEPT, FALSE);
     }
 
-  gtk_window_set_transient_for (GTK_WINDOW (app->new_profile_dialog),
-                                transient_parent);
+  gtk_window_set_transient_for (GTK_WINDOW (app->new_profile_dialog), transient_parent);
 
   gtk_window_present (GTK_WINDOW (app->new_profile_dialog));
 }

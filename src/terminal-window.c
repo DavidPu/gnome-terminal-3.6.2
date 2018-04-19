@@ -3310,6 +3310,7 @@ confirm_close_window_or_tab (TerminalWindow *window,
                             GTK_BUTTONS_CANCEL,
                             "%s", n_tabs > 1 ? _("Close this window?") : _("Close this terminal?"));
 
+  gtk_window_set_transient_for(GTK_WINDOW (dialog), GTK_WINDOW (window));
   if (n_tabs > 1)
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                               "%s", _("There are still processes running in some terminals in this window. "
@@ -3856,7 +3857,7 @@ terminal_set_title_callback (GtkAction *action,
                                    GTK_MESSAGE_OTHER,
                                    GTK_BUTTONS_OK_CANCEL,
                                    "%s", "");
-
+  gtk_window_set_transient_for(GTK_WINDOW (dialog), GTK_WINDOW (window));
   gtk_window_set_title (GTK_WINDOW (dialog), _("Set Title"));
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_role (GTK_WINDOW (dialog), "gnome-terminal-change-title");
