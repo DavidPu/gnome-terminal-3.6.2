@@ -87,7 +87,7 @@
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "3.6.2"
+/* #define VERSION "3.6.2" */
 
 /* Define if smclient is enabled */
 #define WITH_SMCLIENT 1
